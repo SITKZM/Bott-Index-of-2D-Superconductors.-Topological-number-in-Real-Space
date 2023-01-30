@@ -2,7 +2,7 @@
 
 This is the program to Bott index, a topological number of insulators or superconductors in real space.
 
-The Hamiltonian is of 2-dimentional superconductor when adding magnetic field h_z, and Rashba spin-orbit interaction.[1]
+The Hamiltonian is of 2-dimentional superconductors when adding magnetic field h_z, and Rashba spin-orbit interaction.[1]
 
 
 
