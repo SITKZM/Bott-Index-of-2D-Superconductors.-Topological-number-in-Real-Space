@@ -28,7 +28,7 @@ The included pair_potential.txt and particle_number.txt are the example. When th
 Delta_i
 
 
-When the partilce number at the site i and spin up is n_iup, and at the site i and spin down is n_idown, you write the file as follows:
+When the particle number at the site i and with the spin up is n_iup, and at the site i and with the spin down is n_idown, you write the file as follows:
 
 n_iup    n_idown
 
