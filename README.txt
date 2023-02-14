@@ -1,4 +1,4 @@
-<About>
+## About
 
 This is the program to Bott index, a topological number of insulators or superconductors in real space.
 
@@ -6,7 +6,7 @@ The Hamiltonian is of 2-dimentional superconductors when adding magnetic field h
 
 
 
-<Hop file>
+## Hop file
 
 You have to prepare the hopping indices and the unit vector in the direction.
 
@@ -19,7 +19,7 @@ The example file is for one of Penrose approximants.
 
 
 
-<Pair potential and particle number file>
+## Pair potential and particle number file
 
 You have to prepare the pair potentials and the particle numbers.
 
@@ -36,6 +36,6 @@ n_iup    n_idown
 
 The example file is for one of Penrose approximants.
 
-<Referrence>
+## Referrence
 
 [1] R. Ghadimi, T. Sugimoto, K. Tanaka, and T. Tohyama. (2021). Phys. Rev. B. 104, 144511.
