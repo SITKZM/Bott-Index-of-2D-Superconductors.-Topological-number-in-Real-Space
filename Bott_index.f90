@@ -4,14 +4,14 @@ program Bott_index
     implicit none
     !parameter
     integer, parameter :: N = 3571, allhop = 7186
-    double precision, parameter :: U = 3.1, mu = -1.55, hsq = 0.35, V = 2.55, pi = 4*atan(1.)
+    double precision, parameter :: U = 3.1, tildemu = 3.8, hsq = 0.35, V = 2.55, pi = 4*atan(1.)
     character(7), parameter :: hop_file = "hop.txt"
     character(19), parameter :: Delta_file = "pair_potential.txt", PN_file = "particle_number.txt"
     character(24), parameter :: pos_file = "rescaled_coordinates.txt", E_file = "eigval.txt"
     character(10), parameter :: result_file = "result.txt"
     !variable
     integer :: unit_write_result
-    double precision :: h_z = sqrt(hsq)
+    double precision :: mu, h_z = sqrt(hsq)
     double precision :: PN(2*N)
     complex(kind(0d0)) :: Delta(N), Hamiltonian(4 * N, 4 * N)
     double precision :: Bott
@@ -25,6 +25,7 @@ program Bott_index
     call system_clock(time_begin_c, CountPerSec, CountMax)
 
     call read_quantities()
+    mu = tildemu - U*sum(PN)/(2 * N)
 
     call make_Hamiltonian()
     call ZHEEVD('V', 'U', 4 * N, Hamiltonian, 4 * N, W, WORK, 2 * 4 * N + 16 * N**2,&
