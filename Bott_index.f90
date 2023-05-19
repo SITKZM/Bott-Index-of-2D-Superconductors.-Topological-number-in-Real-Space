@@ -192,7 +192,8 @@ contains
     end subroutine get_Bott_index
 
     subroutine write_files()
-        integer :: i
+        integer :: i, j
+        character(1) :: s
 
         ! eigenenergies
         open(newunit=unit_write_result, file=E_file)
@@ -200,6 +201,25 @@ contains
                 write(unit_write_result, *) W(i)
             end do
         close(unit_write_result)
+        
+        ! wave functions
+        do i = 1, 9
+            write (s, '(i1)') i
+            open(newunit=unit_write_result, file="wave_func/fermi_above" // s // "_WF.txt")
+                do j = 1, 4 * N
+                    write(unit_write_result, *) real(Hamiltonian(j, 2 * N + i)), aimag(Hamiltonian(j, 2 * N + i))
+                end do
+            close(unit_write_result)
+        end do
+
+        do i = 1, 9
+            write (s, '(i1)') i
+            open(newunit=unit_write_result, file="wave_func/fermi_below" // s // "_WF.txt")
+                do j = 1, 4 * N
+                    write(unit_write_result, *) real(Hamiltonian(j, 2 * N + 1 - i)), aimag(Hamiltonian(j, 2 * N + 1 - i))
+                end do
+            close(unit_write_result)
+        end do
 
         ! hsq max_Delta mean_Delta min_Delta min_E Bott
         open(newunit=unit_write_result, file=result_file)
