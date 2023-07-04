@@ -3,8 +3,14 @@ program Bott_index
     use,intrinsic :: iso_fortran_env
     implicit none
     !parameter
-    integer, parameter :: N = 3571, allhop = 7186
-    double precision, parameter :: U = 3.1, tildemu = 3.8, hsq = 0.35, V = 2.55, pi = 4*atan(1.)
+    integer, parameter :: N = 3571
+    integer, parameter :: allhop = 7186
+    double precision, parameter :: U = 3.1
+    double precision, parameter :: tildemu = 3.8
+    double precision, parameter :: hsq = 0.35
+    double precision, parameter :: lambda_R = 2.55
+    double precision, parameter :: lambda_D = 1.0
+    double precision, parameter :: pi = 4*atan(1.)
     character(7), parameter :: hop_file = "hop.txt"
     character(19), parameter :: Delta_file = "pair_potential.txt", PN_file = "particle_number.txt"
     character(24), parameter :: pos_file = "rescaled_coordinates.txt", E_file = "eigval.txt"
@@ -102,10 +108,11 @@ contains
             x = x/r
             y = y/r
 
+            ! Rashba
             !iup, jdown
             i = 2*l - 1
             j = 2*m
-            H_ij = V*cmplx(-x, y, kind(0d0))
+            H_ij = lambda_R*cmplx(-x, y, kind(0d0))
 
             Hamiltonian(i, j) = H_ij
             Hamiltonian(j, i) = conjg(H_ij)
@@ -115,7 +122,28 @@ contains
             !idown, jup
             i = 2*l
             j = 2*m - 1
-            H_ij = V*cmplx(x, y, kind(0d0))
+            H_ij = lambda_R*cmplx(x, y, kind(0d0))
+
+            Hamiltonian(i, j) = H_ij
+            Hamiltonian(j, i) = conjg(H_ij)
+            Hamiltonian(i + 2 * N, j + 2 * N) = -conjg(H_ij)
+            Hamiltonian(j + 2 * N, i + 2 * N) = -H_ij
+
+            ! Dresselhaus
+            !iup, jdown
+            i = 2*l - 1
+            j = 2*m
+            H_ij = lambda_D*cmplx(-y, x, kind(0d0))
+
+            Hamiltonian(i, j) = H_ij
+            Hamiltonian(j, i) = conjg(H_ij)
+            Hamiltonian(i + 2 * N, j + 2 * N) = -conjg(H_ij)
+            Hamiltonian(j + 2 * N, i + 2 * N) = -H_ij
+
+            !idown, jup
+            i = 2*l
+            j = 2*m - 1
+            H_ij = lambda_D*cmplx(y, x, kind(0d0))
 
             Hamiltonian(i, j) = H_ij
             Hamiltonian(j, i) = conjg(H_ij)
