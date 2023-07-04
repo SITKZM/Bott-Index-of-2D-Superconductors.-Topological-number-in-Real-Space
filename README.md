@@ -36,6 +36,9 @@ n_iup    n_idown
 
 The example file is for one of Penrose approximants.
 
+## Added
+I added Dresselhaus spin-orbit interaction terms. The intensity is lambda_D.
+
 ## Referrence
 
 [1] R. Ghadimi, T. Sugimoto, K. Tanaka, and T. Tohyama. (2021). Phys. Rev. B. 104, 144511.
