@@ -108,11 +108,10 @@ contains
             x = x/r
             y = y/r
 
-            ! Rashba
             !iup, jdown
             i = 2*l - 1
             j = 2*m
-            H_ij = lambda_R*cmplx(-x, y, kind(0d0))
+            H_ij = lambda_R*cmplx(-x, y, kind(0d0)) + lambda_D*cmplx(-y, x, kind(0d0))
 
             Hamiltonian(i, j) = H_ij
             Hamiltonian(j, i) = conjg(H_ij)
@@ -122,28 +121,7 @@ contains
             !idown, jup
             i = 2*l
             j = 2*m - 1
-            H_ij = lambda_R*cmplx(x, y, kind(0d0))
-
-            Hamiltonian(i, j) = H_ij
-            Hamiltonian(j, i) = conjg(H_ij)
-            Hamiltonian(i + 2 * N, j + 2 * N) = -conjg(H_ij)
-            Hamiltonian(j + 2 * N, i + 2 * N) = -H_ij
-
-            ! Dresselhaus
-            !iup, jdown
-            i = 2*l - 1
-            j = 2*m
-            H_ij = lambda_D*cmplx(-y, x, kind(0d0))
-
-            Hamiltonian(i, j) = H_ij
-            Hamiltonian(j, i) = conjg(H_ij)
-            Hamiltonian(i + 2 * N, j + 2 * N) = -conjg(H_ij)
-            Hamiltonian(j + 2 * N, i + 2 * N) = -H_ij
-
-            !idown, jup
-            i = 2*l
-            j = 2*m - 1
-            H_ij = lambda_D*cmplx(y, x, kind(0d0))
+            H_ij = lambda_R*cmplx(x, y, kind(0d0)) + lambda_D*cmplx(y, x, kind(0d0))
 
             Hamiltonian(i, j) = H_ij
             Hamiltonian(j, i) = conjg(H_ij)
